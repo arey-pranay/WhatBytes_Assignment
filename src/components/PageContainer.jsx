@@ -3,9 +3,11 @@ import Sidebar from "./Sidebar";
 import HTMLLogo from "@/components/assets/htmlLogo.png";
 import Image from "next/image";
 import ComparisonChart from "./ComparisonChart";
-const PageContainer = ({ setIsModalOpen }) => {
+import PieChart from "./PieChart";
+const PageContainer = ({ setIsModalOpen, rank, percentile, correctAns }) => {
   return (
     <div className="max-w-screen h-full flex">
+      <h1>{/* {rank} {percentile} {correctAns} */}</h1>
       <Sidebar />{" "}
       <div className="flex flex-col px-5">
         <div className=" my-6 text-gray-500 h-8 w-full">
@@ -41,29 +43,29 @@ const PageContainer = ({ setIsModalOpen }) => {
               <div className="flex justify-between">
                 <div className="text-center flex">
                   <div className="">
-                    <div className="bg-gray-100 rounded-full h-min p-4">
+                    <div className="bg-gray-100 rounded-full h-min p-4 hover:scale-95 hover:rotate-45 transition-all duration-200">
                       🏆
                       {/* <Image src={HTMLLogo} height={30} width={30} /> */}
                     </div>
                   </div>
 
                   <div className="m-0  p-0 flex flex-col items-start pl-2">
-                    <div className="text-xl font-bold">1</div>
+                    <div className="text-xl font-bold">{rank}</div>
                     <div className="text-gray-500 font-semibold text-sm">
                       YOUR RANK
                     </div>
                   </div>
                 </div>
                 <div className="text-center flex border-x-2 px-2 border-gray-200">
-                  <div className="">
-                    <div className="bg-gray-100 rounded-full h-min p-4">
+                  <div className="group">
+                    <div className="bg-gray-100 rounded-full h-min p-4 hover:scale-95 hover:rotate-45 transition-all duration-200">
                       {/* <Image src={HTMLLogo} height={30} width={30} /> */}
                       📄
                     </div>
                   </div>
 
                   <div className="m-0  p-0 flex flex-col items-start pl-2">
-                    <div className="text-xl font-bold">30%</div>
+                    <div className="text-xl font-bold">{percentile}%</div>
                     <div className="text-gray-500 font-semibold text-sm">
                       PERCENTILE
                     </div>
@@ -71,13 +73,13 @@ const PageContainer = ({ setIsModalOpen }) => {
                 </div>{" "}
                 <div className="text-center flex">
                   <div className="">
-                    <div className="bg-gray-100 rounded-full h-min p-4">
+                    <div className="bg-gray-100 rounded-full h-min p-4  hover:scale-95 hover:rotate-45 transition-all duration-200">
                       ✅{/* <Image src={HTMLLogo} height={30} width={30} /> */}
                     </div>
                   </div>
 
                   <div className="m-0  p-0 flex flex-col items-start pl-2">
-                    <div className="text-xl font-bold">10/15</div>
+                    <div className="text-xl font-bold">{correctAns}/15</div>
                     <div className="text-gray-500 font-semibold text-sm">
                       CORRECT ANSWERS
                     </div>
@@ -86,7 +88,7 @@ const PageContainer = ({ setIsModalOpen }) => {
               </div>
             </div>
             {/* <div className="bg-white border-2 border-gray-100 rounded-lg p-4"> */}
-            <ComparisonChart />
+            <ComparisonChart yourPercentile={correctAns} />
             {/* </div> */}
           </div>
           <div className="flex flex-col gap-4 w-[40%]">
@@ -151,8 +153,12 @@ const PageContainer = ({ setIsModalOpen }) => {
                 </div>
               </div>
             </div>
-            <div className="bg-white border-2 border-gray-100 rounded p-4">
-              <h1>Question Analysis</h1> <p>You scored 10/12 ,marks</p>
+            <div className="bg-white w-contain h-contain border-2 border-gray-100 rounded p-4">
+              <h1>Question Analysis</h1>{" "}
+              <p>You scored {correctAns}/15 ,marks</p>
+              <div>
+                <PieChart n={correctAns} />
+              </div>
             </div>
           </div>
         </div>

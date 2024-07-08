@@ -1,4 +1,3 @@
-// components/ComparisonChart.js
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -23,14 +22,19 @@ ChartJS.register(
   annotationPlugin
 );
 
-const ComparisonChart = () => {
+const ComparisonChart = ({ yourPercentile }) => {
+  console.log(yourPercentile);
   const data = {
-    labels: [0, 25, 50, 75, 100],
+    labels: [
+      0, 6.67, 13.33, 20, 26.67, 33.33, 40, 46.67, 53.33, 60, 66.67, 73.33, 80,
+      86.67, 93.33, 100,
+    ],
     datasets: [
       {
-        label: "Percentile Distribution",
-        data: [5, 10, 30, 25, 5],
+        label: "numberOfStudent",
+        data: [0, 5, 10, 15, 20, 25, 30, 30, 40, 45, 50, 45, 35, 25, 15, 5],
         borderColor: "#844bc0",
+        borderWidth: 1,
         backgroundColor: "rgba(137, 75, 192, 0.2)",
         pointBorderColor: "#a14bc0",
         pointBackgroundColor: "#fff",
@@ -55,9 +59,9 @@ const ComparisonChart = () => {
         annotations: {
           line1: {
             type: "line",
-            xMin: 30, // Position the line at 30% percentile
-            xMax: 30,
-            borderColor: "rgba(255, 99, 132, 1)",
+            xMin: yourPercentile - 0,
+            xMax: yourPercentile - 0,
+            borderColor: "#8e9191",
             borderWidth: 1,
             label: {
               content: "Your Percentile",
@@ -71,7 +75,7 @@ const ComparisonChart = () => {
     },
     elements: {
       line: {
-        tension: 1,
+        tension: 0.4,
       },
     },
     scales: {
@@ -81,7 +85,18 @@ const ComparisonChart = () => {
           display: false,
         },
         ticks: {
-          callback: (value) => `${value}%`,
+          callback: function (value, index, values) {
+            if (
+              value == 0 ||
+              value == 25 ||
+              value == 50 ||
+              value == 75 ||
+              value == 100
+            ) {
+              return value;
+            }
+            return "";
+          },
         },
       },
       y: {
@@ -89,17 +104,20 @@ const ComparisonChart = () => {
         grid: {
           color: "rgba(200, 200, 200, 0.2)",
         },
+        ticks: {
+          display: false,
+        },
       },
     },
   };
 
   return (
-    <div className=" mx-auto my-8 p-4 bg-white rounded shadow-md">
+    <div className="mx-auto my-8 p-4 bg-white rounded shadow-md">
       <h2 className="text-lg font-medium mb-4">Comparison Graph</h2>
       <div className="flex gap-4 mb-8">
         <div className="text-center mt-0">
           <p className="text-gray-700 text-left">
-            You scored <span className="font-semibold">30% percentile</span>{" "}
+            You scored <span className="font-semibold">90% percentile</span>{" "}
             which is lower than the average percentile{" "}
             <span className="font-semibold">72%</span> of all the engineers who
             took this assessment.

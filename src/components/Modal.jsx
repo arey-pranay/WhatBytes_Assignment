@@ -1,7 +1,33 @@
-import React from "react";
-import "@/components/Modal";
-export default function Modal({ isOpen, onClose }) {
+import React, { useState } from "react";
+
+export default function Modal({
+  setIsModalOpen,
+  isOpen,
+  onClose,
+  rank,
+  percentile,
+  correctAns,
+  setRank,
+  setPercentile,
+  setCorrectAns,
+}) {
   if (!isOpen) return null;
+
+  const [tempRank, setTempRank] = useState(rank);
+  const [tempPercentile, setTempPercentile] = useState(percentile);
+  const [tempCorrectAns, setTempCorrectAns] = useState(correctAns);
+
+  const handleRankChange = (e) => {
+    setTempRank(e.target.value);
+  };
+
+  const handlePercentileChange = (e) => {
+    setTempPercentile(e.target.value);
+  };
+
+  const handleScoreChange = (e) => {
+    setTempCorrectAns(e.target.value);
+  };
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
@@ -10,7 +36,15 @@ export default function Modal({ isOpen, onClose }) {
           &times;
         </button>
         <h2 className="text-xl font-bold mb-4">Update scores</h2>
-        <form>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            setRank(tempRank);
+            setPercentile(tempPercentile);
+            setCorrectAns(tempCorrectAns);
+            setIsModalOpen(false);
+          }}
+        >
           <div className="mb-4">
             <label htmlFor="rank" className="block mb-2">
               Update your Rank
@@ -20,7 +54,8 @@ export default function Modal({ isOpen, onClose }) {
               id="rank"
               name="rank"
               className="border p-2 w-full rounded"
-              defaultValue="4"
+              defaultValue={rank}
+              onChange={handleRankChange}
             />
           </div>
           <div className="mb-4">
@@ -32,7 +67,8 @@ export default function Modal({ isOpen, onClose }) {
               id="percentile"
               name="percentile"
               className="border p-2 w-full rounded"
-              defaultValue="30"
+              defaultValue={percentile}
+              onChange={handlePercentileChange}
             />
           </div>
           <div className="mb-4">
@@ -44,7 +80,8 @@ export default function Modal({ isOpen, onClose }) {
               id="score"
               name="score"
               className="border p-2 w-full rounded"
-              defaultValue="10"
+              defaultValue={correctAns}
+              onChange={handleScoreChange}
             />
           </div>
           <div className="flex justify-between">
