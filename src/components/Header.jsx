@@ -12,7 +12,7 @@ const Header = () => {
       </div>
 
       <div></div>
-      <div className="flex items-center  p-1">
+      <div className="flex items-center border-2 border-gray-200 rounded-lg p-1">
         {/* Couldn't find the same image of Rahil Sir, so used the one I got from Linkedin to keep it as accurate as possible */}
         <Image
           src={profileImage}
