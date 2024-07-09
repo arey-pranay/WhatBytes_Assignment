@@ -23,16 +23,32 @@ ChartJS.register(
 );
 
 const ComparisonChart = ({ yourPercentile }) => {
-  console.log(yourPercentile);
   const data = {
     labels: [
-      0, 6.67, 13.33, 20, 26.67, 33.33, 40, 46.67, 53.33, 60, 66.67, 73.33, 80,
-      86.67, 93.33, 100,
+      0, 6.67, 13.33, 20, 25, 26.67, 33.33, 40, 50, 46.67, 53.33, 60, 66.67,
+      73.33, 75, 80, 86.67, 93.33, 100,
     ],
     datasets: [
       {
         label: "numberOfStudent",
-        data: [0, 5, 10, 15, 20, 25, 30, 30, 40, 45, 50, 45, 35, 25, 15, 5],
+        data: [
+          { x: 0, y: 2 },
+          { x: 6.67, y: 6 },
+          { x: 13.33, y: 8 },
+          { x: 20, y: 12 },
+          { x: 20, y: 18 },
+          { x: 33.33, y: 20 },
+          { x: 40, y: 22 },
+          { x: 46.67, y: 30 },
+          { x: 53.33, y: 25 },
+          { x: 60, y: 18 },
+          { x: 66.67, y: 4 },
+          { x: 73.33, y: 10 },
+          { x: 90, y: 4 },
+          { x: 80, y: 4 },
+          { x: 90, y: 4 },
+          { x: 90, y: 4 },
+        ],
         borderColor: "#844bc0",
         borderWidth: 1,
         backgroundColor: "rgba(137, 75, 192, 0.2)",
@@ -59,15 +75,33 @@ const ComparisonChart = ({ yourPercentile }) => {
         annotations: {
           line1: {
             type: "line",
-            xMin: yourPercentile - 0,
-            xMax: yourPercentile - 0,
+            xMin: yourPercentile,
+            xMax: yourPercentile,
             borderColor: "#8e9191",
             borderWidth: 1,
             label: {
-              content: "Your Percentile",
+              content: "your percentile",
               enabled: true,
               position: "top",
               backgroundColor: "rgba(255, 99, 132, 0.8)",
+              yAdjust: -20,
+              xAdjust: -20,
+            },
+          },
+          point1: {
+            type: "point",
+            xValue: 90,
+            yValue: 4,
+            backgroundColor: "#844bc0",
+            radius: 5,
+            label: {
+              content: ["90", "numberOfStudent : 4"],
+              enabled: true,
+              position: "right",
+              backgroundColor: "rgba(255, 255, 255, 0.8)",
+              color: "#000",
+              yAdjust: -10,
+              xAdjust: 10,
             },
           },
         },
@@ -85,13 +119,14 @@ const ComparisonChart = ({ yourPercentile }) => {
           display: false,
         },
         ticks: {
-          callback: function (value, index, values) {
+          display: true,
+          callback: function (value) {
             if (
-              value == 0 ||
-              value == 25 ||
-              value == 50 ||
-              value == 75 ||
-              value == 100
+              value === 0 ||
+              value === 25 ||
+              value === 50 ||
+              value === 75 ||
+              value === 100
             ) {
               return value;
             }
@@ -103,6 +138,7 @@ const ComparisonChart = ({ yourPercentile }) => {
         beginAtZero: true,
         grid: {
           color: "rgba(200, 200, 200, 0.2)",
+          display: false,
         },
         ticks: {
           display: false,
@@ -112,20 +148,21 @@ const ComparisonChart = ({ yourPercentile }) => {
   };
 
   return (
-    <div className="mx-auto my-8 p-4 bg-white rounded shadow-md">
-      <h2 className="text-lg font-medium mb-4">Comparison Graph</h2>
+    <div className="mx-auto my-8 p-4 bg-white rounded border-2 border-gray-100">
+      <h2 className="text-lg font-bold mb-4">Comparison Graph</h2>
       <div className="flex gap-4 mb-8">
         <div className="text-center mt-0">
           <p className="text-gray-700 text-left">
-            You scored <span className="font-semibold">90% percentile</span>{" "}
+            You scored{" "}
+            <span className="font-semibold">{yourPercentile}% percentile</span>{" "}
             which is lower than the average percentile{" "}
             <span className="font-semibold">72%</span> of all the engineers who
             took this assessment.
           </p>
         </div>
         <div className="w-1/4">
-          <div className="bg-gray-100 rounded-full h-12 w-12 text-center flex items-center justify-center">
-            📈{/* <Image src={HTMLLogo} height={30} width={30} /> */}
+          <div className="bg-gray-100 rounded-full h-12 w-12 text-center flex items-center justify-center hover:scale-95 hover:rotate-45 transition-all duration-200">
+            📈
           </div>
         </div>
       </div>
