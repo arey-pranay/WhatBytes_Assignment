@@ -9,7 +9,7 @@ const PieChart = ({ n }) => {
     datasets: [
       {
         data: [n, 15 - n],
-        backgroundColor: [" rgb(59 130 246)", "#e0e0e0"],
+        backgroundColor: ["rgb(59 130 246)", "#e0e0e0"],
         hoverBackgroundColor: ["rgb(29 26 255)", "#cfcfcf"],
         borderWidth: 0,
         cutout: "70%",
@@ -26,21 +26,16 @@ const PieChart = ({ n }) => {
         display: false,
       },
       tooltip: {
-        callbacks: {
-          label: function (tooltipItem) {
-            return `${tooltipItem.label}: ${tooltipItem.raw}`;
-          },
-        },
+        enabled: false,
       },
     },
   };
 
   return (
-    <div className="w-52 h-52 p-10 mx-auto bg-white rounded   relative">
+    <div className="w-52 h-52 p-10 mx-auto bg-white rounded relative">
       <Doughnut data={data} options={options} />
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <span style={{ fontSize: "1.5rem" }}>🎯</span>{" "}
-        {/* Replace with desired emoji */}
+        <span style={{ fontSize: "1.5rem" }}>🎯</span>
       </div>
     </div>
   );

@@ -23,11 +23,17 @@ ChartJS.register(
 );
 
 const ComparisonChart = ({ yourPercentile }) => {
+  const generateLabels = (step, max) => {
+    const labels = [];
+    for (let i = 0; i <= max; i += step) {
+      labels.push(parseFloat(i.toFixed(2)));
+    }
+    return labels;
+  };
+
   const data = {
-    labels: [
-      0, 6.67, 13.33, 20, 25, 26.67, 33.33, 40, 50, 46.67, 53.33, 60, 66.67,
-      73.33, 75, 80, 86.67, 93.33, 100,
-    ],
+    labels: generateLabels(100 / 15, 100),
+
     datasets: [
       {
         label: "numberOfStudent",
@@ -36,17 +42,17 @@ const ComparisonChart = ({ yourPercentile }) => {
           { x: 6.67, y: 6 },
           { x: 13.33, y: 8 },
           { x: 20, y: 12 },
-          { x: 20, y: 18 },
+          { x: 26.67, y: 18 },
           { x: 33.33, y: 20 },
           { x: 40, y: 22 },
           { x: 46.67, y: 30 },
           { x: 53.33, y: 25 },
           { x: 60, y: 18 },
-          { x: 66.67, y: 4 },
+          { x: 66.67, y: 12 },
           { x: 73.33, y: 10 },
-          { x: 90, y: 4 },
-          { x: 80, y: 4 },
-          { x: 90, y: 4 },
+          { x: 80, y: 8 },
+          { x: 86.67, y: 6 },
+          { x: 93.33, y: 4 },
           { x: 90, y: 4 },
         ],
         borderColor: "#844bc0",
@@ -75,8 +81,8 @@ const ComparisonChart = ({ yourPercentile }) => {
         annotations: {
           line1: {
             type: "line",
-            xMin: yourPercentile,
-            xMax: yourPercentile,
+            xMin: (yourPercentile / 100) * 15,
+            xMax: (yourPercentile / 100) * 15,
             borderColor: "#8e9191",
             borderWidth: 1,
             label: {
@@ -84,24 +90,6 @@ const ComparisonChart = ({ yourPercentile }) => {
               enabled: true,
               position: "top",
               backgroundColor: "rgba(255, 99, 132, 0.8)",
-              yAdjust: -20,
-              xAdjust: -20,
-            },
-          },
-          point1: {
-            type: "point",
-            xValue: 90,
-            yValue: 4,
-            backgroundColor: "#844bc0",
-            radius: 5,
-            label: {
-              content: ["90", "numberOfStudent : 4"],
-              enabled: true,
-              position: "right",
-              backgroundColor: "rgba(255, 255, 255, 0.8)",
-              color: "#000",
-              yAdjust: -10,
-              xAdjust: 10,
             },
           },
         },
@@ -119,16 +107,17 @@ const ComparisonChart = ({ yourPercentile }) => {
           display: false,
         },
         ticks: {
-          display: true,
           callback: function (value) {
+            let temp = (value / 15) * 100;
             if (
-              value === 0 ||
-              value === 25 ||
-              value === 50 ||
-              value === 75 ||
-              value === 100
+              temp === 0 ||
+              temp === 20 ||
+              temp === 40 ||
+              temp === 60 ||
+              temp === 80 ||
+              temp === 100
             ) {
-              return value;
+              return temp;
             }
             return "";
           },
@@ -138,7 +127,6 @@ const ComparisonChart = ({ yourPercentile }) => {
         beginAtZero: true,
         grid: {
           color: "rgba(200, 200, 200, 0.2)",
-          display: false,
         },
         ticks: {
           display: false,
@@ -148,8 +136,10 @@ const ComparisonChart = ({ yourPercentile }) => {
   };
 
   return (
-    <div className="mx-auto my-8 p-4 bg-white rounded border-2 border-gray-100">
-      <h2 className="text-lg font-bold mb-4">Comparison Graph</h2>
+    <div className="mx-auto  p-4 bg-white rounded border-2 border-gray-100">
+      <h2 className="text-lg font-bold mb-4  hover:underline underline-offset-0 hover:underline-offset-2 transition-all duration-100">
+        Comparison Graph
+      </h2>
       <div className="flex gap-4 mb-8">
         <div className="text-center mt-0">
           <p className="text-gray-700 text-left">

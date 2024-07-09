@@ -8,7 +8,6 @@ import BottomNav from "./BottomNav";
 const PageContainer = ({ setIsModalOpen, rank, percentile, correctAns }) => {
   return (
     <div className="max-w-screen h-full flex ">
-      <h1>{/* {rank} {percentile} {correctAns} */}</h1>
       <Sidebar /> <BottomNav />
       <div className="flex flex-col lg:pl-10 px-5">
         <div className=" my-6 text-gray-500 h-8 w-full">
@@ -51,55 +50,53 @@ const PageContainer = ({ setIsModalOpen, rank, percentile, correctAns }) => {
                 Quick Statistics
               </h2>
               <div className="flex justify-between">
-                <div className="text-center flex">
+                <div className="text-center flex flex-col  w-1/3 items-center lg:flex-row justify-center">
                   <div className="">
-                    <div className="bg-gray-100 rounded-full h-min p-4 hover:scale-95 hover:rotate-45 transition-all duration-200">
+                    <div className="bg-gray-100 w-16 lg:w-full rounded-full h-min p-4 hover:scale-95 hover:rotate-45 transition-all duration-200">
                       🏆
-                      {/* <Image src={HTMLLogo} height={30} width={30} /> */}
                     </div>
                   </div>
 
-                  <div className="m-0  p-0 flex flex-col items-start pl-2">
+                  <div className="m-0  p-0 flex flex-col items-center lg:items-start pl-2">
                     <div className="text-xl font-bold">{rank}</div>
                     <div className="text-gray-500 font-semibold text-sm">
                       YOUR RANK
                     </div>
                   </div>
                 </div>
-                <div className="text-center flex border-x-2 px-2 border-gray-200">
+                <div className="text-center flex flex-col lg:flex-row w-1/3 items-center border-x-2 px-2 border-gray-200 lg:mr-4">
                   <div className="group">
-                    <div className="bg-gray-100 rounded-full h-min p-4 hover:scale-95 hover:rotate-45 transition-all duration-200">
-                      {/* <Image src={HTMLLogo} height={30} width={30} /> */}
+                    <div className="bg-gray-100 rounded-full mx-auto h-min w-16 lg:w-full p-4 hover:scale-95 hover:rotate-45 transition-all duration-200">
                       📄
                     </div>
                   </div>
 
-                  <div className="m-0  p-0 flex flex-col items-start pl-2">
+                  <div className="m-0  p-0 flex flex-col items-center lg:items-start pl-2">
                     <div className="text-xl font-bold">{percentile}%</div>
                     <div className="text-gray-500 font-semibold text-sm">
                       PERCENTILE
                     </div>
                   </div>
                 </div>{" "}
-                <div className="text-center flex">
+                <div className="text-center w-1/3 items-center  flex flex-col lg:flex-row ">
                   <div className="">
-                    <div className="bg-gray-100 rounded-full h-min p-4  hover:scale-95 hover:rotate-45 transition-all duration-200">
-                      ✅{/* <Image src={HTMLLogo} height={30} width={30} /> */}
+                    <div className="bg-gray-100 rounded-full h-min w-16 lg:w-full p-4  hover:scale-95 hover:rotate-45 transition-all duration-200">
+                      ✅
                     </div>
                   </div>
 
-                  <div className="m-0  p-0 flex flex-col items-start pl-2">
-                    <div className="text-xl font-bold">{correctAns}/15</div>
-                    <div className="text-gray-500 font-semibold text-sm">
+                  <div className="m-0  p-0 flex flex-col items-center lg:items-start pl-2">
+                    <div className="text-xl font-bold text-left">
+                      {correctAns}/15
+                    </div>
+                    <div className="text-gray-500 text-left font-semibold text-sm">
                       CORRECT ANSWERS
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            {/* <div className="bg-white border-2 border-gray-100 rounded-lg p-4"> */}
-            <ComparisonChart yourPercentile={correctAns} />
-            {/* </div> */}
+            <ComparisonChart yourPercentile={percentile} />
           </div>
           <div className="flex flex-col gap-4 w-full lg:w-[40%]">
             <div className="bg-white flex flex-col gap-4 border-2 border-gray-100 rounded py-6 px-8">

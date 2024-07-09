@@ -172,13 +172,13 @@ export default function Modal({
             <button
               type="button"
               onClick={onClose}
-              className="bg-white border-indigo-900 border font-bold text-indigo-900 px-3 py-2 rounded-lg"
+              className="bg-white border-indigo-900 border font-bold text-indigo-900 px-3 py-2 rounded-lg hover:bg-gray-100"
             >
               cancel
             </button>
             <button
               type="submit"
-              className="bg-indigo-900 flex font-bold gap-4 place-content-baseline items-center text-white px-10 py-2 rounded-lg"
+              className="bg-indigo-900 flex font-bold gap-4 place-content-baseline items-center text-white px-10 py-2 rounded-lg hover:bg-indigo-800"
             >
               save{" "}
               <span className="font-thin">
